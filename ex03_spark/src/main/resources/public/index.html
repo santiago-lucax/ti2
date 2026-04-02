@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Alunos</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        input[type=text] { padding: 5px; margin: 5px 0; width: 200px; }
+        input[type=submit] { padding: 5px 10px; }
+        .aluno { padding: 5px; border-bottom: 1px solid #ccc; }
+        .form-section { margin-top: 20px; padding: 10px; border: 1px solid #999; width: 300px; }
+    </style>
+</head>
+<body>
+
+    <h1>Gerenciador de Alunos</h1>
+
+    <!-- LISTAR ALUNOS -->
+    <div class="form-section">
+        <h2>Lista de Alunos</h2>
+        <div id="tabelaAlunos">Clique em "Listar" para ver os alunos</div>
+        <input type="button" value="Listar" onclick="listar()">
+    </div>
+
+    <!-- INSERIR ALUNO -->
+    <div class="form-section">
+        <h2>Inserir Aluno</h2>
+        <form onsubmit="inserir(event)">
+            <label>Nome:</label><br>
+            <input type="text" id="nome" required><br>
+            <label>Matrícula:</label><br>
+            <input type="text" id="matricula" required><br>
+            <label>Sexo:</label><br>
+            <input type="text" id="sexo" required><br>
+            <input type="submit" value="Inserir">
+        </form>
+    </div>
+
+    <!-- DELETAR ALUNO -->
+    <div class="form-section">
+        <h2>Excluir Aluno</h2>
+        <form onsubmit="deletar(event)">
+            <label>Digite a matrícula do aluno a excluir:</label><br>
+            <input type="text" id="matriculaExcluir" required><br>
+            <input type="submit" value="Excluir">
+        </form>
+    </div>
+
+<script>
+    // LISTAR ALUNOS
+    function listar() {
+        fetch("/aluno/listar", { method: "POST" })
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById("tabelaAlunos").innerHTML = html;
+        });
+    }
+
+    // INSERIR ALUNO
+    function inserir(event) {
+        event.preventDefault();
+        const nome = document.getElementById("nome").value;
+        const matricula = document.getElementById("matricula").value;
+        const sexo = document.getElementById("sexo").value;
+
+        fetch("/aluno/inserir", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "nome=" + encodeURIComponent(nome) 
+                 + "&matricula=" + encodeURIComponent(matricula) 
+                 + "&sexo=" + encodeURIComponent(sexo)
+        })
+        .then(res => res.text())
+        .then(msg => {
+            alert(msg);
+            listar();
+        });
+    }
+
+    // DELETAR ALUNO
+    function deletar(event) {
+        event.preventDefault();
+        const matricula = document.getElementById("matriculaExcluir").value;
+
+        fetch("/aluno/deletar", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "matricula=" + encodeURIComponent(matricula)
+        })
+        .then(res => res.text())
+        .then(msg => {
+            alert(msg);
+            listar();
+        });
+    }
+</script>
+
+</body>
+</html>
