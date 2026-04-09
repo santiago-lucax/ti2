@@ -5,10 +5,12 @@ import java.sql.*;
 public class Connect{
 	protected Connection conexao;
 	
+	// construtor
 	public Connect() {
 		conexao = null;
 	}
 	
+	// funcao para tentar conectar ao banco de dados
 	public boolean conectar() {
 		String driverName = "org.postgresql.Driver";                    
 		String serverName = "localhost";
@@ -33,10 +35,12 @@ public class Connect{
 		return status;
 	}
 	
+	// getter para conexao
 	public Connection getConexao() {
 		return conexao;
 	}
 	
+	// funcao fechar conexao
 	public boolean close() {
 		boolean status = false;
 		
