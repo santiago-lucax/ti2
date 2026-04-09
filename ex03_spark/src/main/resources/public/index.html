@@ -7,38 +7,53 @@
 </head>
 <body>
 
-    <h1>Gerenciador de Alunos</h1>
+    <header>
+		<h1>Gerenciador de Alunos</h1>
+	</header>
 
-    <!-- LISTAR ALUNOS -->
-    <div class="form-section">
-        <h2>Lista de Alunos</h2>
-        <div id="tabelaAlunos">Clique em "Listar" para ver os alunos</div>
-        <input type="button" value="Listar" onclick="listar()">
-    </div>
-
-    <!-- INSERIR ALUNO -->
-    <div class="form-section">
-        <h2>Inserir Aluno</h2>
-        <form onsubmit="inserir(event)">
-            <label>Nome:</label><br>
-            <input type="text" id="nome" required><br>
-            <label>Matrícula:</label><br>
-            <input type="text" id="matricula" required><br>
-            <label>Sexo:</label><br>
-            <input type="text" id="sexo" required><br>
-            <input type="submit" value="Inserir">
-        </form>
-    </div>
-
-    <!-- DELETAR ALUNO -->
-    <div class="form-section">
-        <h2>Excluir Aluno</h2>
-        <form onsubmit="deletar(event)">
-            <label>Digite a matrícula do aluno a excluir:</label><br>
-            <input type="text" id="matriculaExcluir" required><br>
-            <input type="submit" value="Excluir">
-        </form>
-    </div>
+	<div class="container">
+		
+	    <!-- LISTAR ALUNOS -->
+	    <div class="form-section">
+	        <h2>Lista de Alunos</h2>
+			<br>
+	        <div id="tabelaAlunos">Clique em "Listar" para ver os alunos</div>
+	        <input type="button" value="Listar" onclick="listar()">
+	    </div>
+	
+	    <!-- INSERIR ALUNO -->
+	    <div class="form-section">
+	        <h2>Inserir Aluno</h2>
+			<br>
+	        <form onsubmit="inserir(event)">
+	            <label>Nome:</label><br>
+	            <input type="text" id="nome" required><br>
+	            <label>Matrícula:</label><br>
+	            <input type="text" id="matricula" required><br>
+	            <label>Sexo:</label><br>
+	            <input type="text" id="sexo" required><br>
+	            <input type="submit" value="Inserir">
+	        </form>
+	    </div>
+	
+	    <!-- DELETAR ALUNO -->
+	    <div class="form-section">
+	        <h2>Excluir Aluno</h2>
+			<br>
+	        <form onsubmit="deletar(event)">
+	            <label>Digite a matrícula do aluno a excluir:</label><br>
+	            <input type="text" id="matriculaExcluir" required><br>
+	            <input type="submit" value="Excluir">
+	        </form>
+	    </div>
+		
+	</div>
+	
+	<footer>
+		<p>
+			&copy; Gerenciador de Alunos - 2026
+		</p>
+	</footer>
 
 <script>
     // LISTAR ALUNOS
@@ -67,6 +82,7 @@
         .then(res => res.text())
         .then(msg => {
             alert(msg);
+			event.target.reset(); // limpa tudo do formulário
             listar();
         });
     }
@@ -84,6 +100,7 @@
         .then(res => res.text())
         .then(msg => {
             alert(msg);
+			event.target.reset(); // limpa tudo do formulário
             listar();
         });
     }

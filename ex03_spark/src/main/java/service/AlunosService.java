@@ -16,10 +16,10 @@ public class AlunosService {
 
         List<Alunos> lista = dao.listar();
 
-        String html = "<h1>Lista de Alunos</h1>";
+        String html = "";
 
         for (Alunos a : lista) {
-            html += "<p>" 
+            html += "<p>"
                  + a.getNome() + " | "
                  + a.getMatricula() + " | "
                  + a.getSexo()
